@@ -1,5 +1,8 @@
 #include <iostream>
-#include "./TutorialConfig.hh"
+#include "TutorialConfig.hh"
+#ifdef USE_MYMATH
+#include "MathFunctions.hh"
+#endif
 
 auto main(int argc, char **argv) -> int
 {
@@ -13,7 +16,14 @@ auto main(int argc, char **argv) -> int
     }
 
     const double inputValue = std::atof(argv[1]);
-    std::cout << inputValue << std::endl;
+
+#ifdef USE_MYMATH
+    const double outputValue = mysqrt(inputValue);
+#else
+    const double outputValue = std::sqrt(inputValue);
+#endif
+
+    std::cout << outputValue << std::endl;
 
     return 0;
 }

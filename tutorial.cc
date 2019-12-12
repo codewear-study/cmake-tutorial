@@ -23,7 +23,7 @@ auto main(int argc, char **argv) -> int
     const double outputValue = std::sqrt(inputValue);
 #endif
 
-    std::cout << outputValue << std::endl;
+    std::cout << inputValue << " is " << outputValue << std::endl;
 
     return 0;
 }

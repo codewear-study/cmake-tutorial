@@ -49,6 +49,9 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+# Binary files
+build/*
+
 # --------------------
 # Visual Studio Code
 # --------------------

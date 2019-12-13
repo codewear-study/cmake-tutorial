@@ -1,12 +1,12 @@
 add_library(MathFunctions
             mysqrt.cc
-            ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+            ${CMAKE_CURRENT_BINARY_DIR}/Table.hh
             )
 add_executable(MakeTable MakeTable.cc)
 
 add_custom_command(
-  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Table.h
-  COMMAND MakeTable ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Table.hh
+  COMMAND MakeTable ${CMAKE_CURRENT_BINARY_DIR}/Table.hh
   DEPENDS MakeTable
   )
 
@@ -19,4 +19,4 @@ target_include_directories(MathFunctions
 
 # install rules
 install(TARGETS MathFunctions DESTINATION lib)
-install(FILES MathFunctions.h DESTINATION include)
+install(FILES MathFunctions.hh DESTINATION include)

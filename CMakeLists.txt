@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name and version
-project(Tutorial VERSION 1.3)
+project(Tutorial VERSION 1.7)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)
@@ -32,7 +32,7 @@ target_include_directories(Tutorial PUBLIC
 
 # add the install targets
 install(TARGETS Tutorial DESTINATION bin)
-install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h"
+install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.hh"
   DESTINATION include
   )
 
@@ -64,3 +64,9 @@ do_test(Tutorial 7 "7 is 2.645")
 do_test(Tutorial 25 "25 is 5")
 do_test(Tutorial -25 "-25 is [-nan|nan|0]")
 do_test(Tutorial 0.0001 "0.0001 is 0.01")
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+include(CPack)

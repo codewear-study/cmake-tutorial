@@ -4,10 +4,7 @@ option(USE_MYMATH "Use tutorial provided math implementation" ON)
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name
-project(Tutorial VERSION 1.2.0)
-
-# pass the version number
-configure_file(TutorialConfig.hh.in TutorialConfig.hh)
+project(Tutorial VERSION 1.3.0)
 
 if(USE_MYMATH)
   # add the MathFunctions library
@@ -57,3 +54,6 @@ do_test(Tutorial 7 "7 is 2.645")
 do_test(Tutorial 25 "25 is 5")
 do_test(Tutorial -25 "-25 is [-nan|nan|0]")
 do_test(Tutorial 0.0001 "0.0001 is 0.01")
+
+# pass variables
+configure_file(TutorialConfig.hh.in TutorialConfig.hh)

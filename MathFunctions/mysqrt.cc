@@ -1,18 +1,32 @@
-#include "MathFunctions.hh"
-#if defined(HAVE_CXX_STD_LOG) && defined(HAVE_CXX_STD_EXP)
 #include <cmath>
 #include <iostream>
-#endif
 
-auto mysqrt(double x) -> double
+#include "MathFunctions.hh"
+
+// a hack square root calculation using simple operations
+double mysqrt(double x)
 {
-#if defined(HAVE_CXX_STD_LOG) && defined(HAVE_CXX_STD_EXP)
-    double result = std::exp(std::log(x) * 0.5);
-    std::cout << "Computing sqrt of " << x << " to be " << result
-                << " using std::log and std::exp in cmath" << std::endl;
-#else
-    double result = x;
-#endif
+  if (x <= 0) {
+    return 0;
+  }
 
-    return result;
+  // if we have both log and exp then use them
+#if defined(HAVE_LOG) && defined(HAVE_EXP)
+  double result = exp(log(x) * 0.5);
+  std::cout << "Computing sqrt of " << x << " to be " << result
+            << " using log and exp" << std::endl;
+#else
+  double result = x;
+
+  // do ten iterations
+  for (int i = 0; i < 10; ++i) {
+    if (result <= 0) {
+      result = 0.1;
+    }
+    double delta = x - (result * result);
+    result = result + 0.5 * delta / result;
+    std::cout << "Computing sqrt of " << x << " to be " << result << std::endl;
+  }
+#endif
+  return result;
 }

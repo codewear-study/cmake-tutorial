@@ -1,44 +1,24 @@
 add_library(MathFunctions mysqrt.cc)
 
+# state that anybody linking to us needs to include the current source dir
+# to find MathFunctions.h, while we don't.
 target_include_directories(MathFunctions
-    INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
-    PRIVATE ${CMAKE_BINARY_DIR}
-    )
+          INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
+          )
 
-include(CheckCXXSourceRuns)
-check_cxx_source_runs(
-  "
-  #include <cmath>
-  
-  auto main(int argc, char **argv) -> int
-  {
-    double test = static_cast<double>(100.0);
-    test = std::log(test);
-    
-    return 0;
-  }
-  "
-  HAVE_CXX_STD_LOG
-)
-check_cxx_source_runs(
-  "
-  #include <cmath>
-  
-  auto main(int argc, char **argv) -> int
-  {
-    double test = static_cast<double>(100.0);
-    test = std::exp(test);
-    
-    return 0;
-  }
-  "
-  HAVE_CXX_STD_EXP
-)
+# does this system provide the log and exp functions?
+include(CheckSymbolExists)
+if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+set(CMAKE_REQUIRED_LIBRARIES "m")
+endif()
+check_symbol_exists(log "math.h" HAVE_LOG)
+check_symbol_exists(exp "math.h" HAVE_EXP)
 
-if(HAVE_CXX_STD_LOG AND HAVE_CXX_STD_EXP)
+if(HAVE_LOG AND HAVE_EXP)
   target_compile_definitions(MathFunctions
-                             PRIVATE HAVE_CXX_STD_LOG HAVE_CXX_STD_EXP)
+                             PRIVATE "HAVE_LOG" "HAVE_EXP")
 endif()
 
+# install rules
 install(TARGETS MathFunctions DESTINATION lib)
-install(FILES MathFunctions.hh DESTINATION include)
+install(FILES MathFunctions.h DESTINATION include)

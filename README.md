@@ -10,7 +10,7 @@
 
 ---
 
-CMake를 사용하는 [nana, nanagui, abseil, flatui] 프로젝트 중 하나를 선택하여 빌드 설정을 보고 이해하며 자신에게 맞는 설정을 만들 수 있다.
+CMake를 사용하는 [nana, nanogui, abseil, flatui] 프로젝트 중 하나를 선택하여 빌드 설정을 보고 이해하며 자신에게 맞는 설정을 만들 수 있다.
 
 ## 방법
 
@@ -20,4 +20,4 @@ CMake를 사용하는 [nana, nanagui, abseil, flatui] 프로젝트 중 하나를
 
 [CMake Tutorial - CMake 3.16.0 Documentation](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
 
-이후 [nana, nanagui, absil, flatui] 중 하나를 선택하여 빌드를 시도한다.
+이후 [nana, nanogui, absil, flatui] 중 하나를 선택하여 빌드를 시도한다.
